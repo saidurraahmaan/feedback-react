@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import {Route, Routes, BrowserRouter as Router} from "react-router-dom";
+import Header from "./components/Header";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import FeedbackLIst from "./components/FeedbackList";
+import FeedbackStates from "./components/FeedbakcStates";
+import FeedbackForm from "./components/FeedbackForm";
+import AboutPage from "./components/pages/AboutPage";
+import AboutIconLink from "./components/AboutIconLink";
+import {FeedbackProvider} from "./context/FeedbackContext"
+
+
+export const App = () => {
+
+    return (
+        <FeedbackProvider>
+            <Router>
+                <Header/>
+                <div className='container'>
+                    <Routes>
+                        <Route path='/' element={
+                            <>
+                                <FeedbackForm />
+                                <FeedbackStates />
+                                <FeedbackLIst />
+                            </>
+                        }>
+                        </Route>
+                        <Route path='/about' element={<AboutPage/>}/>
+                    </Routes>
+
+                    <AboutIconLink/>
+
+                </div>
+            </Router>
+        </FeedbackProvider>
+    );
 }
-
-export default App;
